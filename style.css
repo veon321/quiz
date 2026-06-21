@@ -12,7 +12,47 @@ body {
   align-items: center;
 }
 
-main input[radio] {
+.questions {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  font-size: 20px;
+}
+
+.questions input[type="radio"] {
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(189, 8, 17, 0.788);
+  border: 1px solid black;
+  border-radius: 15px;
+  text-align: center;
+  padding: 60px;
+  min-height: 350px;
+  width: 450px;
+}
+
+.question {
+  margin-bottom: 40px;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+#next {
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer;
+  background-color: rgba(13, 177, 241, 0.945);
+  border-radius: 15px;
+  width: 200px;
+}
+
+#next:hover {
+  background-color: rgb(12, 145, 197);
 }
