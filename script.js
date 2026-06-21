@@ -60,3 +60,7 @@ const quizData = [
     correct: 2,
   },
 ];
+
+let currentQuestionIndex = 0;
+
+function showQuestion() {}
