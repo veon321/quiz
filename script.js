@@ -60,9 +60,3 @@ const quizData = [
     correct: 2,
   },
 ];
-
-const questionElement = document.querySelector(".question");
-const answersContainer = document.querySelector(".answers");
-const questionNumberElement = document.querySelector(".question-number");
-
-console.log(quizData);
