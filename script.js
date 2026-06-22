@@ -63,4 +63,18 @@ const quizData = [
 
 let currentQuestionIndex = 0;
 
-function showQuestion() {}
+function showQuestion() {
+  const currentQuestion = document.getElementById("question");
+  const answersQuestion = document.querySelectorAll(".answer");
+
+  const quizDataIndex = quizData[currentQuestionIndex];
+
+  currentQuestion.innerHTML = quizDataIndex.question;
+
+  answersQuestion.forEach((answer) => {
+    quizDataIndex.answers.forEach((answerr) => {
+      console.log(answerr);
+    });
+  });
+}
+showQuestion();
