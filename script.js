@@ -81,8 +81,11 @@ function showQuestion() {
 
   answersQuestion.forEach((answer, index) => {
     answer.innerHTML = answerNow[index];
-    answer.addEventListener("click", () => {
-      console.log(`${answer.className} click answer`);
+    answer.addEventListener("click", (e) => {
+      const classes = e.target.classList;
+      if (classes.contains(quizDataIndex.correct)) {
+        console.log("poprawna odpowiedź");
+      }
     });
   });
 }
