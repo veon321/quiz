@@ -126,3 +126,11 @@ hr {
 #next:hover {
   background-color: #2563eb;
 }
+
+.good-answer {
+  background-color: #279c18b2;
+}
+
+.wrong-answer {
+  background-color: red;
+}

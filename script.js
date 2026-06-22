@@ -85,6 +85,9 @@ function showQuestion() {
       const classes = e.target.classList;
       if (classes.contains(quizDataIndex.correct)) {
         console.log("poprawna odpowiedź");
+        e.target.classList.add("good-answer");
+      } else {
+        e.target.classList.add("wrong-answer");
       }
     });
   });
