@@ -71,10 +71,14 @@ function showQuestion() {
 
   currentQuestion.innerHTML = quizDataIndex.question;
 
-  answersQuestion.forEach((answer) => {
-    quizDataIndex.answers.forEach((answerr) => {
-      console.log(answerr);
-    });
+  const answerNow = [];
+
+  quizDataIndex.answers.forEach((answerr) => {
+    answerNow.push(answerr);
+  });
+
+  answersQuestion.forEach((answer, index) => {
+    answer.innerHTML = answerNow[index];
   });
 }
 showQuestion();
