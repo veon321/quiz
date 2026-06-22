@@ -63,6 +63,8 @@ const quizData = [
 
 let currentQuestionIndex = 0;
 
+const buttonNext = document.getElementById("next");
+
 function showQuestion() {
   const currentQuestion = document.getElementById("question");
   const answersQuestion = document.querySelectorAll(".answer");
@@ -79,6 +81,14 @@ function showQuestion() {
 
   answersQuestion.forEach((answer, index) => {
     answer.innerHTML = answerNow[index];
+    answer.addEventListener("click", () => {
+      console.log(`${answer.className} click answer`);
+    });
   });
 }
 showQuestion();
+
+function nextQuestion() {
+  console.log("next");
+}
+buttonNext.addEventListener("click", nextQuestion);
