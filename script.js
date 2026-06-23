@@ -63,34 +63,42 @@ const quizData = [
 
 let currentQuestionIndex = 0;
 let points = 0;
+let maxQuestion = 10;
 
 const buttonNext = document.getElementById("next");
 const questionNumber = document.getElementById("question-number");
 const currentQuestion = document.getElementById("question");
 const answersQuestion = document.querySelectorAll(".answer");
+const quizDiv = document.getElementById("quiz-start");
+const quizEnd = document.getElementById("quiz-end");
+const again = document.getElementById("again");
+let quizDataIndex = quizData[currentQuestionIndex];
+
+function handleClick(e) {
+  const classes = e.target.classList;
+
+  answersQuestion.forEach((anyAnswer) => {
+    anyAnswer.removeEventListener("click", handleClick);
+  });
+
+  if (classes.contains(quizDataIndex.correct + 1)) {
+    e.target.classList.add("good-answer");
+    points += 1;
+    console.log("Zmiana punktu: ", points);
+  } else {
+    e.target.classList.add("wrong-answer");
+  }
+}
 
 function showQuestion() {
-  let quizDataIndex = quizData[currentQuestionIndex];
+  quizDataIndex = quizData[currentQuestionIndex];
   currentQuestion.innerHTML = quizDataIndex.question;
+
   const answerNow = [];
   quizDataIndex.answers.forEach((answerr) => {
     answerNow.push(answerr);
   });
 
-  function handleClick(e) {
-    const classes = e.target.classList;
-
-    answersQuestion.forEach((anyAnswer) => {
-      anyAnswer.removeEventListener("click", handleClick);
-    });
-
-    if (classes.contains(quizDataIndex.correct + 1)) {
-      e.target.classList.add("good-answer");
-      points += 1;
-    } else {
-      e.target.classList.add("wrong-answer");
-    }
-  }
   answersQuestion.forEach((answer, index) => {
     answer.innerHTML = answerNow[index];
     answer.addEventListener("click", handleClick);
@@ -100,12 +108,29 @@ showQuestion();
 
 function nextQuestion() {
   currentQuestionIndex += 1;
+  const result = document.getElementById("result");
   answerNow = [];
   answersQuestion.forEach((answer) => {
     answer.classList.remove("good-answer");
     answer.classList.remove("wrong-answer");
   });
+  if (currentQuestionIndex >= maxQuestion) {
+    quizDiv.classList.add("hidden");
+    quizEnd.classList.remove("hidden");
+    result.innerHTML = `You scored ${points} / ${maxQuestion} points`;
+    return;
+  }
   questionNumber.innerHTML = `Question ${currentQuestionIndex + 1} of 10`;
   showQuestion();
 }
 buttonNext.addEventListener("click", nextQuestion);
+
+function quizAgain() {
+  points = 0;
+  currentQuestionIndex = 0;
+  quizEnd.classList.add("hidden");
+  quizDiv.classList.remove("hidden");
+  questionNumber.innerHTML = `Question ${currentQuestionIndex + 1} of 10`;
+  showQuestion();
+}
+again.addEventListener("click", quizAgain);

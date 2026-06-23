@@ -27,6 +27,7 @@ main {
   min-height: 450px;
   width: 490px;
   box-sizing: border-box;
+  position: relative;
 }
 
 .quiz-container {
@@ -133,4 +134,38 @@ hr {
 
 .wrong-answer {
   background-color: red;
+}
+
+.quiz-end {
+  font-weight: bold;
+  font-size: 28px;
+  text-align: center;
+  color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.again {
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 12px;
+  width: 200px;
+}
+
+.hidden {
+  display: none;
 }
