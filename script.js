@@ -143,7 +143,6 @@ buttonNext.addEventListener("click", nextQuestion);
 function quizAgain() {
   clearInterval(timeInterval);
   clearInterval(timeStartInterval);
-
   timeInterval = setInterval(setTimer, 1000);
   timeStartInterval = setInterval(timeStart, 1000);
   currentTimeToEnd = 60;
