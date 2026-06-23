@@ -13,6 +13,6 @@ Experience the quiz in action here:
 
 ## 🛠️ Technologies Used
 
-- **HTML5:** Semantic document structure (utilizing modal-like layout structures).
-- **CSS3:** Modern UI styling featuring **Flexbox layouts**, advanced positioning, shadows, and interactive element transitions.
-- **JavaScript (Vanilla JS):** High-performance DOM manipulation, `setInterval` state management, and strict event listener orchestration.
+- **HTML5:**
+- **CSS3:**
+- **JavaScript (Vanilla JS):**
