@@ -63,15 +63,15 @@ const quizData = [
 
 let currentQuestionIndex = 0;
 let answered = false;
+let points = 0;
 
 const buttonNext = document.getElementById("next");
+const questionNumber = document.getElementById("question-number");
+const currentQuestion = document.getElementById("question");
+const answersQuestion = document.querySelectorAll(".answer");
+const quizDataIndex = quizData[currentQuestionIndex];
 
 function showQuestion() {
-  const currentQuestion = document.getElementById("question");
-  const answersQuestion = document.querySelectorAll(".answer");
-
-  const quizDataIndex = quizData[currentQuestionIndex];
-
   currentQuestion.innerHTML = quizDataIndex.question;
 
   const answerNow = [];
@@ -88,6 +88,7 @@ function showQuestion() {
       if (classes.contains(quizDataIndex.correct + 1)) {
         answered = true;
         e.target.classList.add("good-answer");
+        points += 1;
       } else {
         answered = true;
         e.target.classList.add("wrong-answer");
@@ -98,6 +99,15 @@ function showQuestion() {
 showQuestion();
 
 function nextQuestion() {
-  console.log("next");
+  if (answered) {
+    currentQuestionIndex += 1;
+    answersQuestion.forEach((answer) => {
+      answer.classList.remove("good-answer");
+      answer.classList.remove("wrong-answer");
+    });
+    questionNumber.innerHTML = `Question ${currentQuestionIndex + 1} of 10`;
+    answered = false;
+    console.log(points);
+  }
 }
 buttonNext.addEventListener("click", nextQuestion);
