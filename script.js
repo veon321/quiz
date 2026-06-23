@@ -64,6 +64,8 @@ const quizData = [
 let currentQuestionIndex = 0;
 let points = 0;
 let maxQuestion = 10;
+let currentTimeToEnd = 60;
+let currentTime = 0;
 
 const buttonNext = document.getElementById("next");
 const questionNumber = document.getElementById("question-number");
@@ -72,6 +74,8 @@ const answersQuestion = document.querySelectorAll(".answer");
 const quizDiv = document.getElementById("quiz-start");
 const quizEnd = document.getElementById("quiz-end");
 const again = document.getElementById("again");
+const time = document.getElementById("time");
+const endTime = document.getElementById("endTime");
 let quizDataIndex = quizData[currentQuestionIndex];
 
 function handleClick(e) {
@@ -84,7 +88,6 @@ function handleClick(e) {
   if (classes.contains(quizDataIndex.correct + 1)) {
     e.target.classList.add("good-answer");
     points += 1;
-    console.log("Zmiana punktu: ", points);
   } else {
     e.target.classList.add("wrong-answer");
   }
@@ -108,6 +111,7 @@ showQuestion();
 
 function nextQuestion() {
   currentQuestionIndex += 1;
+  currentTimeToEnd = 61;
   const result = document.getElementById("result");
   answerNow = [];
   answersQuestion.forEach((answer) => {
@@ -118,6 +122,10 @@ function nextQuestion() {
     quizDiv.classList.add("hidden");
     quizEnd.classList.remove("hidden");
     result.innerHTML = `You scored ${points} / ${maxQuestion} points`;
+    endTime.innerHTML = `You completed the quiz in: ${currentTime}s`;
+    clearInterval(timeInterval);
+    clearInterval(timeStartInterval);
+    currentTime = 0;
     return;
   }
   questionNumber.innerHTML = `Question ${currentQuestionIndex + 1} of 10`;
@@ -126,6 +134,9 @@ function nextQuestion() {
 buttonNext.addEventListener("click", nextQuestion);
 
 function quizAgain() {
+  let timeInterval = setInterval(setTimer, 1000);
+  let timeStartInterval = setInterval(timeStart, 1000);
+  currentTimeToEnd = 60;
   points = 0;
   currentQuestionIndex = 0;
   quizEnd.classList.add("hidden");
@@ -134,3 +145,17 @@ function quizAgain() {
   showQuestion();
 }
 again.addEventListener("click", quizAgain);
+
+function setTimer() {
+  currentTimeToEnd -= 1;
+  time.innerHTML = `${currentTimeToEnd}s`;
+  if (currentTimeToEnd <= 0) {
+    nextQuestion();
+  }
+}
+let timeInterval = setInterval(setTimer, 1000);
+
+function timeStart() {
+  currentTime += 1;
+}
+let timeStartInterval = setInterval(timeStart, 1000);
