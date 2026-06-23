@@ -79,17 +79,19 @@ const endTime = document.getElementById("endTime");
 let quizDataIndex = quizData[currentQuestionIndex];
 
 function handleClick(e) {
-  const classes = e.target.classList;
+  const clickedElement = e.currentTarget;
 
   answersQuestion.forEach((anyAnswer) => {
     anyAnswer.removeEventListener("click", handleClick);
   });
 
-  if (classes.contains(quizDataIndex.correct + 1)) {
-    e.target.classList.add("good-answer");
+  const chosenIndex = parseInt(clickedElement.dataset.index);
+
+  if (chosenIndex === quizDataIndex.correct) {
+    clickedElement.classList.add("good-answer");
     points += 1;
   } else {
-    e.target.classList.add("wrong-answer");
+    clickedElement.classList.add("wrong-answer");
   }
 }
 
@@ -104,6 +106,8 @@ function showQuestion() {
 
   answersQuestion.forEach((answer, index) => {
     answer.innerHTML = answerNow[index];
+    answer.dataset.index = index;
+
     answer.removeEventListener("click", handleClick);
     answer.addEventListener("click", handleClick);
   });
@@ -114,11 +118,13 @@ function nextQuestion() {
   currentQuestionIndex += 1;
   currentTimeToEnd = 61;
   const result = document.getElementById("result");
+
   answersQuestion.forEach((answer) => {
     answer.removeEventListener("click", handleClick);
     answer.classList.remove("good-answer");
     answer.classList.remove("wrong-answer");
   });
+
   if (currentQuestionIndex >= maxQuestion) {
     quizDiv.classList.add("hidden");
     quizEnd.classList.remove("hidden");
