@@ -62,6 +62,7 @@ const quizData = [
 ];
 
 let currentQuestionIndex = 0;
+let answered = false;
 
 const buttonNext = document.getElementById("next");
 
@@ -83,10 +84,12 @@ function showQuestion() {
     answer.innerHTML = answerNow[index];
     answer.addEventListener("click", (e) => {
       const classes = e.target.classList;
-      if (classes.contains(quizDataIndex.correct)) {
-        console.log("poprawna odpowiedź");
+      if (answered) return;
+      if (classes.contains(quizDataIndex.correct + 1)) {
+        answered = true;
         e.target.classList.add("good-answer");
       } else {
+        answered = true;
         e.target.classList.add("wrong-answer");
       }
     });
