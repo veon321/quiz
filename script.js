@@ -40,7 +40,7 @@ const quizData = [
   },
   {
     question: "How do you correctly write a single-line comment in JavaScript?",
-    answers: ["// comment", "/* comment */", "# comment", ""],
+    answers: ["// comment", "/* comment */", "# comment", "comment //"],
     correct: 0,
   },
   {
@@ -104,6 +104,7 @@ function showQuestion() {
 
   answersQuestion.forEach((answer, index) => {
     answer.innerHTML = answerNow[index];
+    answer.removeEventListener("click", handleClick);
     answer.addEventListener("click", handleClick);
   });
 }
@@ -113,8 +114,8 @@ function nextQuestion() {
   currentQuestionIndex += 1;
   currentTimeToEnd = 61;
   const result = document.getElementById("result");
-  answerNow = [];
   answersQuestion.forEach((answer) => {
+    answer.removeEventListener("click", handleClick);
     answer.classList.remove("good-answer");
     answer.classList.remove("wrong-answer");
   });
@@ -134,8 +135,11 @@ function nextQuestion() {
 buttonNext.addEventListener("click", nextQuestion);
 
 function quizAgain() {
-  let timeInterval = setInterval(setTimer, 1000);
-  let timeStartInterval = setInterval(timeStart, 1000);
+  clearInterval(timeInterval);
+  clearInterval(timeStartInterval);
+
+  timeInterval = setInterval(setTimer, 1000);
+  timeStartInterval = setInterval(timeStart, 1000);
   currentTimeToEnd = 60;
   points = 0;
   currentQuestionIndex = 0;
