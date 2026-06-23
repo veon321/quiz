@@ -62,52 +62,50 @@ const quizData = [
 ];
 
 let currentQuestionIndex = 0;
-let answered = false;
 let points = 0;
 
 const buttonNext = document.getElementById("next");
 const questionNumber = document.getElementById("question-number");
 const currentQuestion = document.getElementById("question");
 const answersQuestion = document.querySelectorAll(".answer");
-const quizDataIndex = quizData[currentQuestionIndex];
 
 function showQuestion() {
+  let quizDataIndex = quizData[currentQuestionIndex];
   currentQuestion.innerHTML = quizDataIndex.question;
-
   const answerNow = [];
-
   quizDataIndex.answers.forEach((answerr) => {
     answerNow.push(answerr);
   });
 
+  function handleClick(e) {
+    const classes = e.target.classList;
+
+    answersQuestion.forEach((anyAnswer) => {
+      anyAnswer.removeEventListener("click", handleClick);
+    });
+
+    if (classes.contains(quizDataIndex.correct + 1)) {
+      e.target.classList.add("good-answer");
+      points += 1;
+    } else {
+      e.target.classList.add("wrong-answer");
+    }
+  }
   answersQuestion.forEach((answer, index) => {
     answer.innerHTML = answerNow[index];
-    answer.addEventListener("click", (e) => {
-      const classes = e.target.classList;
-      if (answered) return;
-      if (classes.contains(quizDataIndex.correct + 1)) {
-        answered = true;
-        e.target.classList.add("good-answer");
-        points += 1;
-      } else {
-        answered = true;
-        e.target.classList.add("wrong-answer");
-      }
-    });
+    answer.addEventListener("click", handleClick);
   });
 }
 showQuestion();
 
 function nextQuestion() {
-  if (answered) {
-    currentQuestionIndex += 1;
-    answersQuestion.forEach((answer) => {
-      answer.classList.remove("good-answer");
-      answer.classList.remove("wrong-answer");
-    });
-    questionNumber.innerHTML = `Question ${currentQuestionIndex + 1} of 10`;
-    answered = false;
-    console.log(points);
-  }
+  currentQuestionIndex += 1;
+  answerNow = [];
+  answersQuestion.forEach((answer) => {
+    answer.classList.remove("good-answer");
+    answer.classList.remove("wrong-answer");
+  });
+  questionNumber.innerHTML = `Question ${currentQuestionIndex + 1} of 10`;
+  showQuestion();
 }
 buttonNext.addEventListener("click", nextQuestion);
