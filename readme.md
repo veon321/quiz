@@ -6,7 +6,6 @@ A sleek, modern, and fully interactive Quiz application built using vanilla fron
 
 ## Live Demo
 
-Experience the quiz in action here:  
 **[Interactive Quiz Live Demo](https://veon321.github.io/quiz/)**
 
 ---
