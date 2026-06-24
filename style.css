@@ -112,10 +112,12 @@ hr {
   cursor: pointer;
 }
 
-.answer:hover {
-  background-color: #1e293b;
-  color: #ffffff;
-  border-color: #3b82f6;
+@media (hover: hover) {
+  .answer:hover {
+    background-color: #1e293b;
+    color: #ffffff;
+    border-color: #3b82f6;
+  }
 }
 
 #next {
@@ -136,11 +138,13 @@ hr {
 }
 
 .good-answer {
-  background-color: #279c18b2;
+  background-color: #279c18b2 !important;
+  color: #ffffff !important;
 }
 
 .wrong-answer {
-  background-color: red;
+  background-color: red !important;
+  color: #ffffff !important;
 }
 
 .quiz-end {
